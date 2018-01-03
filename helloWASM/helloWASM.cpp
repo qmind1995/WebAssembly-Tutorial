@@ -1,6 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <emscripten/emscripten.h>
 
-int main() {
-  printf("hello, world asd;aksdl;aksl; dkasl;dkasl;da!\n");
-  return 0;
+int main(int argc, char ** argv) {
+    printf("WebAssembly module loaded\n");
+    return 0;
+}
+
+int EMSCRIPTEN_KEEPALIVE roll_dice() {
+    srand ( time(NULL) );
+    return rand() % 6 + 1;
 }
