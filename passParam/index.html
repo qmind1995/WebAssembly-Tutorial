@@ -8,25 +8,20 @@
   </head>
   <body>
 
-    <input id ="param1"> </input>
-    <input id ="param2"> </input>    
-    <span >Click here to make a WASM call</span>    
+    <span id="clickable" >Click to execute cpp add_func</span>    
 
     <!-- Include the JavaScript glue code. -->
     <!-- This will load the WebAssembly module and run its main. --> 
     <script src="index.js"></script>
+    <script src="call_func.js"></script>
     <script>
 
       // When a HTML dice is clicked, it's value will change.
-      let param1 = document.getElementById('param1').value;
-      let param2 = document.getElementById('param2').value;
+      var dice = document.getElementById('clickable');
 
       dice.addEventListener('click', function(){
-        
-        // Make a call to the roll_dice function from the C code.
-        var result = __Z12doubleValuesPai(param1, );
-        dice.className = "dice dice-" + result;                   
-
+                     
+        call_AddnumCppFunc();
       });
     </script>
    
