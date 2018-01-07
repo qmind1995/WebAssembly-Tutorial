@@ -2,7 +2,7 @@ include('index.js');
 
 function call_AddnumCppFunc(){
 
-	const arrayDataToPass = [1,2,3,4,5]
+	const arrayDataToPass = [1.5, 2.2, 3.0, 4.3, 5.1]
 	let buffer
 	let error
 	let result
