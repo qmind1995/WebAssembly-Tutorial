@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WASM TEST</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <script>
+
+      async function load() {
+        let test_binary = await fetch('/test.wasm');
+
+        let test_bytes = await test_binary.arrayBuffer();
+
+        let test_module = await WebAssembly.compile(test_bytes);
+
+        let test_instance = await WebAssembly.instantiate(test_module);
+        let shareMem = new Uint8Array(test_instance.exports.memory.buffer); // point to test_instance mem address
+
+        let array_ = [];
+        for(let i =0; i< 100000; i++){
+          array_.push(i);
+        }
+
+        const myArray = new Uint8Array(array_);
+
+        shareMem.set(myArray, 0);
+
+        let t2  = (new Date()).getTime();
+        test_instance.exports.addThree(0, myArray.length);
+        let t3  = (new Date()).getTime();
+
+        console.log("cal time = ", t3 -t2);
+
+        console.log(shareMem.subarray(0, myArray.length));
+      }
+
+      load();
+
+    </script>
+  </body>
+</html>
