@@ -16,7 +16,7 @@
         let test_module = await WebAssembly.compile(test_bytes);
 
         let test_instance = await WebAssembly.instantiate(test_module);
-        let shareMem = new Uint8Array(test_instance.exports.memory.buffer); // point to test_instance mem address
+        let shareMem = new Uint8Array(test_instance.exports.memory.buffer, 0, 100000); // point to test_instance mem address
 
         let array_ = [];
         for(let i =0; i< 100000; i++){
